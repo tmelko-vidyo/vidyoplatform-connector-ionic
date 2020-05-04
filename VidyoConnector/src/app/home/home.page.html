@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      VidyoPlatform Connector
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">VidyoPlatform Connector</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <ion-list>
+      <ion-item>
+        <ion-label id="portal" color="primary" stacked [(ngModel)]="portal">Portal</ion-label>
+        <ion-input placeholder="*.vidyocloud.com"></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label id="room_key" color="primary" stacked [(ngModel)]="roomKey">Room Key</ion-label>
+        <ion-input placeholder="required" ></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label id="display_name" color="primary" stacked [(ngModel)]="displayName">Display Name</ion-label>
+        <ion-input placeholder="your name"></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label id="pin" color="primary" stacked [(ngModel)]="pin">Pin</ion-label>
+        <ion-input placeholder="optional"></ion-input>
+      </ion-item>
+  
+    </ion-list>
+  
+    <ion-button round outline (click) ="connect()">Conference</ion-button>
+  </div>
+</ion-content>

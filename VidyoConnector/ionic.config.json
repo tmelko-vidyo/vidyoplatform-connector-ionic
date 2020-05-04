@@ -1,0 +1,7 @@
+{
+  "name": "VidyoConnector",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
