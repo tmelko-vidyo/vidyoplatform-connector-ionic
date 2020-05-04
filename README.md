@@ -5,7 +5,7 @@
 
 > Place iOS framework at: /src/ios/
 
-(Different as for vidy.io connector plugin)
+(Different as for Vidyo.io connector plugin)
 
 2. Add Android & iOS platforms:
 
