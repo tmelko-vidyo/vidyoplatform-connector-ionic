@@ -12,8 +12,12 @@
 
 > $ ionic cordova plugin add "path-to-plugin"
   
-4. Run ionic project:
+4. Build & Run ionic project:
+
+> $ ionic cordova build android
 
 > $ ionic cordova run android
+
+> $ ionic cordova build ios
 
 > $ ionic cordova run ios
