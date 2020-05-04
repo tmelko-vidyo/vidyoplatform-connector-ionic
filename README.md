@@ -1,6 +1,11 @@
 ### Vidyoplatform Connector Ionic-Cordova
 
 1. Download/Clone and prepare plugin: https://github.com/tmelko-vidyo/vidyoplatform-connector-cordova-plugin
+> Place Android libs at: /src/androd/lib/
+
+> Place iOS framework at: /src/ios/
+
+(Different as for vidy.io connector plugin)
 
 2. Add Android & iOS platforms:
 
