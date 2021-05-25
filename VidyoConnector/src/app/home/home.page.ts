@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 declare var VidyoPlugin: any;
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: "app-home",
+  templateUrl: "home.page.html",
+  styleUrls: ["home.page.scss"],
 })
 export class HomePage {
 
@@ -14,48 +14,85 @@ export class HomePage {
   displayName: string = "your name";
   pin: string = "";
 
-  constructor() {
-  }
+  constructor() {}
 
   connect() {
-    console.log("Connect" + this.portal + ":" + this.roomKey + ":" + this.displayName + " pin: " + this.pin);
+    console.log(
+      "Connect " +
+        this.portal +
+        ":" +
+        this.roomKey +
+        ":" +
+        this.displayName +
+        " with pin: ;" +
+        this.pin
+    );
 
     /* Pass the callback to the native side */
     VidyoPlugin.setCallback(this.onVidyoEvent);
-    
-    VidyoPlugin.connect([this.portal, this.roomKey, this.displayName, this.pin]);
-  };
+
+    VidyoPlugin.connect([
+      this.portal,
+      this.roomKey,
+      this.displayName,
+      this.pin,
+      8,
+      "debug@VidyoClient info@VidyoConnector warning",
+    ]);
+  }
+
+  extractLog() {
+    VidyoPlugin.extractLog();
+  }
 
   onVidyoEvent = {
-
     onEvent: function (response) {
       let event = response.event;
 
-      switch (response.event) {
-        case 'Connected':
-          console.log('JS layer: connected to the conference');
+      switch (event) {
+        case "Connected":
+          console.log("JS layer: connected to the conference");
           break;
 
-        case 'Disconnected':
-          let reason = response.reason;
-          console.log('JS layer: disconnected from the conference. Reason: ' + reason);
+        case "Disconnected":
+          let disconnectReason = response.value;
+          console.log(
+            "JS layer: disconnected from the conference. Reason: " +
+              disconnectReason
+          );
           break;
 
-        case 'Failure':
-          reason = response.reason;
-          console.log('JS layer: Failure during connection. Reason: ' + reason);
+        case "Failure":
+          let failureReason = response.value;
+          console.log(
+            "JS layer: Failure during connection. Reason: " + failureReason
+          );
           break;
 
-        case 'CameraStateUpdated':
-          let muted = response.muted;
-          console.log('JS layer: Received camera state updated. Muted: ' + muted);
+        case "CameraStateUpdated":
+          let cameraState = response.state;
+          console.log(
+            "JS layer: Received camera state updated. Muted: " + cameraState
+          );
           break;
 
-        case 'MicrophoneStateUpdated':
-          muted = response.muted;
-          console.log('JS layer: Received microphone state updated. Muted: ' + muted);
+        case "MicrophoneStateUpdated":
+          let micState = response.state;
+          console.log(
+            "JS layer: Received microphone state updated. Muted: " + micState
+          );
+          break;
+
+        case "ParticipantJoined":
+          let joined = response.participant;
+          console.log("JS layer: Participant joined: " + joined);
+          break;
+
+        case "ParticipantLeft":
+          let left = response.participant;
+          console.log("JS layer: Participant left: " + left);
           break;
       }
-    }
+    },
   };
 }
